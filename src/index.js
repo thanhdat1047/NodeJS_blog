@@ -12,11 +12,11 @@ const route = require('./routes');
 app.use(express.static(path.join(__dirname, 'public')));
 
 //middleware
-app.use(
-    express.urlencoded({
-        extended: true,
-    }),
-);
+        app.use(
+            express.urlencoded({
+                extended: true,
+            }),
+        );
 // tu form submit len server
 app.use(express.json());
 // su dung code js submit
