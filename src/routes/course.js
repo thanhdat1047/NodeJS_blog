@@ -9,6 +9,7 @@ router.get('/:id/edit',courseController.edit);
 router.post('/store', courseController.store);
 router.put('/:id', courseController.update);
 router.delete('/:id', courseController.delete);
+router.delete('/:id/force', courseController.destroy);
 router.patch('/:id/restore', courseController.patch);
 router.get('/:slug', courseController.show);
 

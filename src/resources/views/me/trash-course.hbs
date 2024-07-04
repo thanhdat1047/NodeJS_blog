@@ -10,7 +10,7 @@
                 <th scope="col">STT</th>
                 <th scope="col">Ten khoa hoc</th>
                 <th scope="col">Trinh do</th>
-                <th scope="col">Thoi gian tao</th>
+                <th scope="col">Thoi gian xoa</th>
                 <th scope="col" colspan="1"></th>
             </tr>
         </thead>
@@ -20,7 +20,7 @@
                 <th scope="row">{{sum @index 1}}</th>
                 <td><a href="/course/{{this.slug}}">{{this.name}}</a></td>
                 <td>{{this.level}}</td>
-                <td>{{this.createdAt}}</td>
+                <td>{{this.deletedAt}}</td>
                 <td>
                     <a href="" class="btn btn-success btn-restore" data-id="{{this._id}}">Khoi phuc</a>
                     <a href="" data-id="{{this._id}}" class="btn btn-danger" data-bs-toggle="modal"
@@ -46,10 +46,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Chac chan muon xoa khoa hoc nay?</p>
+                <p>Hanh dong nay khong the khoi phuc. Ban van muon xoa khoa hoc?</p>
             </div>
             <div class="modal-footer">
-                <button id="btn-delete-course" type="button" class="btn btn-danger">Xoa</button>
+                <button id="btn-delete-course" type="button" class="btn btn-danger">Xoa vinh vien</button>
                 <button  type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huy</button>
             </div>
         </div>
@@ -79,7 +79,7 @@
         var btnDeleteCourse = document.getElementById('btn-delete-course')
         btnDeleteCourse.onclick = function(){
             //alert(courseId)
-            deleteForm.action = '/course/'+courseId +'?_method=DELETE'
+            deleteForm.action = '/course/'+courseId +'/force?_method=DELETE'
             console.log(deleteForm)
             deleteForm.submit();
             
