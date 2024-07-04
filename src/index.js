@@ -1,4 +1,5 @@
 const express = require("express");
+var methodOverride = require('method-override')
 const morgan = require("morgan");
 const { engine } = require("express-handlebars");
 const app = express();
@@ -19,10 +20,13 @@ app.use(
     extended: true,
   })
 );
+
 // tu form submit len server
-app.use(express.json());
 // su dung code js submit
 // XMLHttpRequest, fetch, axios
+app.use(express.json());
+app.use(methodOverride('_method'))
+
 
 //HTTP logger
 //app.use(morgan('combined'))
@@ -33,6 +37,9 @@ app.engine(
   engine({
     defaultLayout: "main",
     extname: ".hbs",
+    helpers: {
+      sum: (a,b)=> a+b,
+  }
   })
 );
 app.set("view engine", "hbs");
