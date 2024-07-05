@@ -6,10 +6,9 @@ const app = express();
 const path = require("path");
 const { log } = require("console");
 const port = 3000;
-const sortMiddleware = require('./app/middleware/sortMiddleware')
 const route = require("./routes");
 const db = require('./config/db');
-
+const sortMiddleware = require('./app/middlewares/sortMiddlewares');
 //Connect DB 
 db.connect();
 //static files
@@ -40,28 +39,7 @@ app.engine(
   engine({
     defaultLayout: "main",
     extname: ".hbs",
-    helpers: {
-      sum: (a,b)=> a+b,
-      sortable: (col,sort )=>{
-        const icons = {
-          default:'fa-solid fa-sort',
-          asc: 'fa-solid fa-arrow-up-short-wide',
-          desc:'fa-solid fa-arrow-down-wide-short'
-        }
-        const types ={
-          default: 'desc',
-          asc: 'desc',
-          desc: 'asc'
-        }
-        const sortType = col === sort.column ? sort.type: 'default'
-        const icon = icons[sortType];
-        const type = types[sort.type];
-
-        return ` <a href="?_sort&column=${col}&type=${type}">
-                    <i class="${icon}"></i>
-                    </a>`
-      }
-  }
+    helpers: require('./helper/handlebars')
   })
 );
 app.set("view engine", "hbs");

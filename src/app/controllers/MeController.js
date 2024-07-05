@@ -6,27 +6,24 @@ class MeController {
     
     // [GET] /me/stored/course
     storedCourses(req, res,next) {
-        let courseQuery = Course.find({});
-        if(req.query.hasOwnProperty('_sort')){
-            courseQuery = courseQuery.sort({
-               [ req.query.column ]: req.query.type
-            })
-        }
-        Promise.all([courseQuery, Course.countDocumentsWithDeleted({deleted:true})])
-        .then(([courses,deleteCount])=>
-            res.render('me/stored-course',
-            { 
-                deleteCount,
-                courses : mutipleMongooseToObject(courses)
+        Promise.all([
+            Course.find({}).sortable(req), 
+            Course.countDocumentsWithDeleted({deleted:true})])
+            .then(([courses,deleteCount])=>
+                res.render('me/stored-course',
+                { 
+                    deleteCount,
+                    courses : mutipleMongooseToObject(courses)
 
-            })
-        ).catch(next);
+                })
+            ).catch(next);
         
 
        
     }
+    // [GET] /me/trash/courses
     trash(req, res,next) {
-        Course.findWithDeleted({deleted:true})
+        Course.findWithDeleted({deleted:true}).sortable(req)
         .then(courses => res.render('me/trash-course',
             { courses : mutipleMongooseToObject(courses)}))
         .catch(next)

@@ -24,9 +24,15 @@
             <tr>
                 <th scope="col">Chon</th>
                 <th scope="col">Stt</th>
-                <th scope="col">Ten khoa hoc</th>
-                <th scope="col">Trinh do</th>
-                <th scope="col">Thoi gian xoa</th>
+                <th scope="col">Ten khoa hoc
+                    {{sortable 'name' _sort}}
+                </th>
+                <th scope="col">Trinh do
+                    {{sortable 'level' _sort}}
+                </th>
+                <th scope="col">Thoi gian xoa
+                    {{sortable 'deletedAt' _sort}}
+                </th>
                 <th scope="col" colspan="1"></th>
             </tr>
         </thead>
