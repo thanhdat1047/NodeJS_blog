@@ -5,6 +5,8 @@ const courseController = require('../app/controllers/CourseController');
 
 //newsController.index function handler
 router.get('/create', courseController.create);
+router.post('/handle-form-actions', courseController.handleFormAction)
+router.post('/handle-form-trask-actions', courseController.handleFormTraskActions)
 router.get('/:id/edit',courseController.edit);
 router.post('/store', courseController.store);
 router.put('/:id', courseController.update);
